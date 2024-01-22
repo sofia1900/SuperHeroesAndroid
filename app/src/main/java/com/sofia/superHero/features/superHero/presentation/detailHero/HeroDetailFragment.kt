@@ -12,11 +12,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sofia.myapplication.R
 import com.sofia.myapplication.databinding.FragmentHeroDetailBinding
+import com.sofia.superHero.app.extensions.hide
 import com.sofia.superHero.app.extensions.setUrl
+import com.sofia.superHero.app.presentation.error.ErrorUiModel
 import com.sofia.superHero.features.superHero.domain.SuperHero
 import com.sofia.superHero.features.superHero.domain.SuperHeroDetail
 import com.sofia.superHero.features.superHero.presentation.detailHero.adapter.HeroDetailAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Error
 
 @AndroidEntryPoint
 class HeroDetailFragment : Fragment() {
@@ -24,7 +27,7 @@ class HeroDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<HeroDetailViewModel>()
     private val detailAdapter = HeroDetailAdapter()
-    val args: HeroDetailFragmentArgs by navArgs()
+    private val args: HeroDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +48,7 @@ class HeroDetailFragment : Fragment() {
             )
             powerstarts.adapter = detailAdapter
 
-            topAppBar.setNavigationOnClickListener {
+            toolbarDetail.setNavigationOnClickListener {
                 findNavController().navigateUp()
             }
         }
@@ -60,17 +63,23 @@ class HeroDetailFragment : Fragment() {
     private fun setupObserver () {
         val observer = Observer<HeroDetailViewModel.UiState>{
             if (it.isLoading){
+                binding.errorView.hide()
                 showLoading()
             }else{
                 hideLoading()
-                if (it.errorApp != null){
-                   //
+                if (it.error != null){
+                    showError(it.error)
                 }else {
+                    binding.errorView.hide()
                     if (it.superHero != null)  bindData(it.superHero)
                 }
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, observer)
+    }
+
+    private fun showError(error: ErrorUiModel){
+        binding.errorView.render(error)
     }
 
     private fun showLoading (){
@@ -86,12 +95,12 @@ class HeroDetailFragment : Fragment() {
         val detailSuperHero : MutableList<SuperHeroDetail> = mutableListOf()
 
         binding.apply {
-            imageHeroe.setUrl(superHero.image)
+            imageHero.setUrl(superHero.image)
             labelName.text = superHero.name
             labelFullName.text = superHero.fullName
             labelAligment.text = superHero.alignment.toUpperCase()
-            if(labelAligment.text == "BAD") labelAligment.setTextColor(resources.getColor(R.color.md_theme_dark_error))
-            topAppBar.title = superHero.name;
+            if(labelAligment.text == "BAD") labelAligment.setTextColor(resources.getColor(R.color.md_theme_light_error))
+            toolbarDetail.title = superHero.name;
 
         }
 

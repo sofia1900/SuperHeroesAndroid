@@ -39,9 +39,10 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <include
+    <com.sofia.superHero.app.presentation.error.ErrorView
         android:id="@+id/error_view"
-        layout="@layout/view_error"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </FrameLayout>

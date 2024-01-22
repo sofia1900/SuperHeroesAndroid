@@ -9,9 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
 import com.google.android.material.snackbar.Snackbar
+import com.sofia.myapplication.R
 import com.sofia.myapplication.databinding.FragmentHeroesListBinding
 import com.sofia.superHero.app.domain.ErrorApp
+import com.sofia.superHero.app.extensions.hide
+import com.sofia.superHero.app.presentation.error.ErrorUiModel
 import com.sofia.superHero.features.superHero.presentation.listHeroes.adapter.SuperHeroAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +26,7 @@ class HeroesListFragment : Fragment() {
     private val binding get() = _binding!!
     private val heroAdapter = SuperHeroAdapter()
     private val viewModel by viewModels<HeroesListViewModel>()
+    private lateinit var skeleton : Skeleton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +35,7 @@ class HeroesListFragment : Fragment() {
     ): View {
         _binding = FragmentHeroesListBinding.inflate(inflater, container, false)
         setupView()
+        skeleton = binding.listHeroes.applySkeleton(R.layout.view_super_hero_item, 8)
         return binding.root
     }
 
@@ -57,12 +64,14 @@ class HeroesListFragment : Fragment() {
     private fun setupObserver() {
         val observer = Observer<HeroesListViewModel.UiState> {
             if (it.isLoading) {
-                //skeleton.showSkeleton()
+                binding.errorView.hide()
+                skeleton.showSkeleton()
             } else {
-                //skeleton.showOriginal()
-                if (it.errorApp != null) {
-                    showError(it.errorApp)
+                skeleton.showOriginal()
+                if (it.error != null) {
+                    showError(it.error)
                 } else {
+                    binding.errorView.hide()
                     it.superHeroes?.apply {
                         heroAdapter.submitList(this)
                     }
@@ -72,8 +81,8 @@ class HeroesListFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, observer)
     }
 
-    private fun showError(error: ErrorApp) {
-        Snackbar.make(binding.root, "Error ...", Snackbar.LENGTH_SHORT).show()
+    private fun showError(error: ErrorUiModel) {
+        binding.errorView.render(error)
     }
 
     override fun onDestroy() {

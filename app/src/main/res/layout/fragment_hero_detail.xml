@@ -12,16 +12,26 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                style="@style/AppMainToolbar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                style="?attr/collapsingToolbarLayoutMediumStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                tools:title="@string/label_title_main"
-                app:navigationIcon="@drawable/ic_arrow" />
+                android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="true"
+                app:expandedTitleTextColor="?attr/colorPrimary"
+                app:collapsedTitleTextColor="?attr/colorPrimary">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/ic_arrow"
+                    app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,7 +41,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.faltenreich.skeletonlayout.SkeletonLayout
-                android:id="@+id/skeletonLayout"
+                android:id="@+id/skeleton_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -39,12 +49,12 @@
                     android:id="@+id/details"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="10dp">
+                    android:padding="@dimen/padding_item_detail">
 
                     <ImageView
-                        android:id="@+id/image_heroe"
+                        android:id="@+id/image_hero"
                         android:layout_width="0dp"
-                        android:layout_height="200dp"
+                        android:layout_height="@dimen/height_image_detail"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/image_heroe"
+                        app:layout_constraintTop_toBottomOf="@id/image_hero"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         tools:text="Spider-Man"
@@ -82,7 +92,7 @@
                         app:layout_constraintEnd_toEndOf="@id/label_aligment"
                         app:layout_constraintTop_toBottomOf="@id/label_name"
                         tools:text="RichardMilhouseJones"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="@dimen/margin_top_detail"/>
 
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -92,7 +102,7 @@
                         app:layout_constraintTop_toBottomOf="@id/label_fullName"
                         app:layout_constraintStart_toStartOf="@id/label_name"
                         app:layout_constraintEnd_toEndOf="@id/label_aligment"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="@dimen/margin_top_detail"
                         tools:listitem="@layout/view_super_hero_powerstart">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -105,8 +115,9 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <include
+    <com.sofia.superHero.app.presentation.error.ErrorView
         android:id="@+id/error_view"
-        layout="@layout/view_error"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

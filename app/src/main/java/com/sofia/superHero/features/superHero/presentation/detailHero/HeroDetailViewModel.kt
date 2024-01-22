@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sofia.superHero.app.domain.ErrorApp
+import com.sofia.superHero.app.presentation.error.ErrorUiModel
+import com.sofia.superHero.app.presentation.error.toErrorUi
 import com.sofia.superHero.features.superHero.domain.GetSuperHeroByIdUseCase
 import com.sofia.superHero.features.superHero.domain.SuperHero
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,14 +23,16 @@ class HeroDetailViewModel @Inject constructor(private val getSuperHeroByIdUseCas
         _uiState.value = UiState(isLoading = true)
         viewModelScope.launch(Dispatchers.IO){
             getSuperHeroByIdUseCase(id).fold(
-                {responseError(it)},
+                {responseError(it, id)},
                 {responseSucess(it)}
             )
         }
     }
 
-    private fun responseError(error : ErrorApp){
-        _uiState.postValue(UiState(errorApp = error))
+    private fun responseError(error : ErrorApp, id: String){
+        _uiState.postValue(UiState(error = error.toErrorUi {
+            loadDetails(id)
+        }))
     }
 
     private fun responseSucess (superHero : SuperHero){
@@ -36,7 +40,7 @@ class HeroDetailViewModel @Inject constructor(private val getSuperHeroByIdUseCas
     }
 
     data class UiState (
-        val errorApp : ErrorApp? = null,
+        val error : ErrorUiModel? = null,
         val isLoading : Boolean = false,
         val superHero : SuperHero? = null
     )

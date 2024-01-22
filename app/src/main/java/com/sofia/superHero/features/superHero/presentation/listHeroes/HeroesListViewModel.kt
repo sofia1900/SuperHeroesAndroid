@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sofia.superHero.app.domain.ErrorApp
+import com.sofia.superHero.app.presentation.error.ErrorUiModel
+import com.sofia.superHero.app.presentation.error.toErrorUi
 import com.sofia.superHero.features.superHero.domain.GetSuperHeroesUseCase
 import com.sofia.superHero.features.superHero.domain.SuperHero
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +31,9 @@ class HeroesListViewModel @Inject constructor(private val getSuperHeroesUseCase:
     }
 
     private fun responseError(error: ErrorApp) {
-        _uiState.postValue(UiState(errorApp = error))
+        _uiState.postValue(UiState(error = error.toErrorUi {
+            loadListSuperHeroes()
+        }))
     }
 
     private fun responseSuccess(listHeroes: List<SuperHero>) {
@@ -37,7 +41,7 @@ class HeroesListViewModel @Inject constructor(private val getSuperHeroesUseCase:
     }
 
     data class UiState(
-        val errorApp: ErrorApp? = null,
+        val error: ErrorUiModel? = null,
         val isLoading: Boolean = false,
         val superHeroes: List<SuperHero>? = null
     )
