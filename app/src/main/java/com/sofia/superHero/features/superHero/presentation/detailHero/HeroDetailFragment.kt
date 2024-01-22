@@ -16,10 +16,9 @@ import com.sofia.superHero.app.extensions.hide
 import com.sofia.superHero.app.extensions.setUrl
 import com.sofia.superHero.app.presentation.error.ErrorUiModel
 import com.sofia.superHero.features.superHero.domain.SuperHero
-import com.sofia.superHero.features.superHero.domain.SuperHeroDetail
+import com.sofia.superHero.features.superHero.domain.SuperHeroPower
 import com.sofia.superHero.features.superHero.presentation.detailHero.adapter.HeroDetailAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Error
 
 @AndroidEntryPoint
 class HeroDetailFragment : Fragment() {
@@ -92,27 +91,27 @@ class HeroDetailFragment : Fragment() {
 
     private fun bindData(superHero : SuperHero){
 
-        val detailSuperHero : MutableList<SuperHeroDetail> = mutableListOf()
-
         binding.apply {
             imageHero.setUrl(superHero.image)
             labelName.text = superHero.name
             labelFullName.text = superHero.fullName
             labelAligment.text = superHero.alignment.toUpperCase()
             if(labelAligment.text == "BAD") labelAligment.setTextColor(resources.getColor(R.color.md_theme_light_error))
-            toolbarDetail.title = superHero.name;
-
+            toolbarDetail.title = superHero.name
         }
+        bindSuperHeroPower(superHero)
+    }
 
-        detailSuperHero.add(SuperHeroDetail(getString(R.string.label_powerstat_inteligencia), superHero.intelligence, superHero.image))
-        detailSuperHero.add(SuperHeroDetail(getString(R.string.label_powerstat_fortaleza), superHero.strength, superHero.image))
-        detailSuperHero.add(SuperHeroDetail(getString(R.string.label_powerstat_velocidad), superHero.speed, superHero.image))
-        detailSuperHero.add(SuperHeroDetail(getString(R.string.label_powerstat_durabilidad), superHero.durability, superHero.image))
-        detailSuperHero.add(SuperHeroDetail(getString(R.string.label_powerstat_fuerza), superHero.power, superHero.image))
-        detailSuperHero.add(SuperHeroDetail(getString(R.string.label_powerstat_combate), superHero.combat, superHero.image))
+    private fun bindSuperHeroPower (superHero : SuperHero){
+        val detailSuperHero : MutableList<SuperHeroPower> = mutableListOf()
+        detailSuperHero.add(SuperHeroPower(getString(R.string.label_powerstat_inteligencia), superHero.intelligence, superHero.image))
+        detailSuperHero.add(SuperHeroPower(getString(R.string.label_powerstat_fortaleza), superHero.strength, superHero.image))
+        detailSuperHero.add(SuperHeroPower(getString(R.string.label_powerstat_velocidad), superHero.speed, superHero.image))
+        detailSuperHero.add(SuperHeroPower(getString(R.string.label_powerstat_durabilidad), superHero.durability, superHero.image))
+        detailSuperHero.add(SuperHeroPower(getString(R.string.label_powerstat_fuerza), superHero.power, superHero.image))
+        detailSuperHero.add(SuperHeroPower(getString(R.string.label_powerstat_combate), superHero.combat, superHero.image))
 
         detailAdapter.submitList(detailSuperHero)
-
     }
 
     override fun onDestroyView() {

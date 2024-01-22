@@ -1,14 +1,14 @@
 package com.sofia.superHero.features.superHero.presentation.detailHero.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.sofia.superHero.features.superHero.domain.SuperHeroDetail
+import com.sofia.superHero.features.superHero.domain.SuperHeroPower
 
-class HeroDetailDiffUtil : DiffUtil.ItemCallback<SuperHeroDetail>(){
-    override fun areItemsTheSame(oldItem: SuperHeroDetail, newItem: SuperHeroDetail): Boolean {
+class HeroDetailDiffUtil : DiffUtil.ItemCallback<SuperHeroPower>(){
+    override fun areItemsTheSame(oldItem: SuperHeroPower, newItem: SuperHeroPower): Boolean {
         return oldItem.powerstat == newItem.powerstat
     }
 
-    override fun areContentsTheSame(oldItem: SuperHeroDetail, newItem: SuperHeroDetail): Boolean {
+    override fun areContentsTheSame(oldItem: SuperHeroPower, newItem: SuperHeroPower): Boolean {
         return oldItem == newItem
     }
 }

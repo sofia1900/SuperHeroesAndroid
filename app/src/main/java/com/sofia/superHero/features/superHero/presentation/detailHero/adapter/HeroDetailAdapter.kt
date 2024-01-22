@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.sofia.myapplication.R
-import com.sofia.superHero.features.superHero.domain.SuperHeroDetail
+import com.sofia.superHero.features.superHero.domain.SuperHeroPower
 
-class HeroDetailAdapter : ListAdapter<SuperHeroDetail, HeroDetailViewHolder>(HeroDetailDiffUtil()) {
+class HeroDetailAdapter : ListAdapter<SuperHeroPower, HeroDetailViewHolder>(HeroDetailDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroDetailViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_super_hero_powerstart, parent, false)
         return HeroDetailViewHolder(view)
