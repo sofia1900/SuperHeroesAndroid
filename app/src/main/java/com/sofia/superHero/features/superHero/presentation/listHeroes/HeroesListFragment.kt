@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.sofia.myapplication.databinding.FragmentHeroesListBinding
 import com.sofia.superHero.app.domain.ErrorApp
 import com.sofia.superHero.features.superHero.presentation.listHeroes.adapter.SuperHeroAdapter
@@ -71,7 +72,9 @@ class HeroesListFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, observer)
     }
 
-    private fun showError(error: ErrorApp) {}
+    private fun showError(error: ErrorApp) {
+        Snackbar.make(binding.root, "Error ...", Snackbar.LENGTH_SHORT).show()
+    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -39,4 +39,9 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <include
+        android:id="@+id/error_view"
+        layout="@layout/view_error"/>
+
+
 </FrameLayout>
