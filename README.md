@@ -1,8 +1,8 @@
 # SuperHeroesAndroid
-Super Heroes personal project - Android (Kotlin)
+Superheros personal project - Android (Kotlin)
 
 # Description
-Súper Héroes is a personal project with which you can see a glimpse of what I have learned about Android mobile programming
+SuperHeros is a personal project with which you can see a glimpse of what I have learned about Android mobile programming
 during the second year of my higher degree in Multiplatform Application Development.
 
 This project consists of developing a mobile application that shows a list of superheroes and details of each one of them.
