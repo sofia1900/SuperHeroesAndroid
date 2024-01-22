@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_item">
+
+    <ImageView
+        android:id="@+id/image_hero"
+        android:layout_width="@dimen/size_image_hero"
+        android:layout_height="@dimen/size_image_hero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/vector_chevron"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_text_item"
+        style="@style/AppTitleHero"
+        app:layout_constraintEnd_toStartOf="@id/vector_chevron"
+        app:layout_constraintStart_toEndOf="@id/image_hero"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Spider-Man" />
+
+    <TextView
+        android:id="@+id/label_full_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_text_item"
+        app:layout_constraintEnd_toStartOf="@id/vector_chevron"
+        app:layout_constraintStart_toStartOf="@id/label_name"
+        app:layout_constraintTop_toBottomOf="@id/label_name"
+        tools:text="Peter Parker" />
+
+    <TextView
+        android:id="@+id/label_occupation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_text_item"
+        app:layout_constraintBottom_toBottomOf="@id/image_hero"
+        app:layout_constraintEnd_toStartOf="@id/vector_chevron"
+        app:layout_constraintStart_toStartOf="@id/label_name"
+        tools:text="Freelance photographer, teacher" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

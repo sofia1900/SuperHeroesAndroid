@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SuperHeroes</string>
+
+    <string name="label_unknown_error">Error inesperado</string>
+    <string name="label_internet_error">¿Tienes conexión a Internet?</string>
+    <string name="label_data_error">Error en la obtención de datos</string>
+    <string name="label_server_error">Error en la conexión con el servidor</string>
+
+    <string name="label_powerstat_inteligencia">Inteligencia</string>
+    <string name="label_powerstat_fortaleza">Fortaleza</string>
+    <string name="label_powerstat_velocidad">Velocidad</string>
+    <string name="label_powerstat_durabilidad">Durabilidad</string>
+    <string name="label_powerstat_fuerza">Fuerza</string>
+    <string name="label_powerstat_combate">Combate</string>
+
+    <string name="label_title_main">Super Hero</string>
+</resources>
