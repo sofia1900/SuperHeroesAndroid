@@ -8,6 +8,13 @@
     <style name="AppTitleHero" parent="TextAppearance.AppCompat.Large">
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="AppLabelAligment" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+    <style name="AppLabelFullName" parent="TextAppearance.AppCompat.Small">
+
+    </style>
     <style name="AppTitleCard" parent="TextAppearance.Material3.TitleMedium" />
     <style name="AppBody" parent="TextAppearance.Material3.BodyLarge" />
     <style name="AppFilledButton" parent="Widget.Material3.Button.IconButton.Filled" />

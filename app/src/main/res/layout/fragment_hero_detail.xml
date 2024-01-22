@@ -66,8 +66,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/image_hero"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
+                        style="@style/AppTitleHero"
                         tools:text="Spider-Man"
                         android:layout_margin="10dp" />
 
@@ -79,10 +78,8 @@
                         app:layout_constraintBottom_toBottomOf="@id/label_name"
                         app:layout_constraintEnd_toEndOf="parent"
                         tools:text="GOOD"
-                        android:textColor="?attr/colorPrimary"
-                        android:textSize="18sp"
-                        android:layout_marginEnd="10dp"
-                        android:textStyle="bold"/>
+                        style="@style/AppLabelAligment"
+                        android:layout_marginEnd="@dimen/margin_end_aligment"/>
 
                     <TextView
                         android:id="@+id/label_fullName"
@@ -92,6 +89,7 @@
                         app:layout_constraintEnd_toEndOf="@id/label_aligment"
                         app:layout_constraintTop_toBottomOf="@id/label_name"
                         tools:text="RichardMilhouseJones"
+                        style="@style/AppLabelFullName"
                         android:layout_marginTop="@dimen/margin_top_detail"/>
 
 
