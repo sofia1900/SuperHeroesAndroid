@@ -5,6 +5,8 @@ plugins {
     //Hilt
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    //Room
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -73,6 +75,11 @@ dependencies {
     implementation("com.faltenreich:skeletonlayout:5.0.0")
     //Material Design 3
     implementation("com.google.android.material:material:1.11.0")
+    //Room
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

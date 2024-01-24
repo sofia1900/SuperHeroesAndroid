@@ -2,14 +2,14 @@ package com.sofia.superHero.features.superHero.data.hero
 
 import com.sofia.superHero.app.domain.Either
 import com.sofia.superHero.app.domain.ErrorApp
-import com.sofia.superHero.features.superHero.data.hero.local.HeroLocalDataSource
+import com.sofia.superHero.features.superHero.data.hero.local.room.HeroLocalDbDataSource
 import com.sofia.superHero.features.superHero.data.hero.remote.HeroApiRemoteDataSource
 import com.sofia.superHero.features.superHero.domain.Hero
 import com.sofia.superHero.features.superHero.domain.HeroRepository
 import javax.inject.Inject
 
 class HeroDataRepository @Inject constructor(
-    private val localData: HeroLocalDataSource,
+    private val localData: HeroLocalDbDataSource,
     private val remoteApiData: HeroApiRemoteDataSource
 ) : HeroRepository {
     override suspend fun findHeroes(): Either<ErrorApp, List<Hero>> {

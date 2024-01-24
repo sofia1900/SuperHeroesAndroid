@@ -1,5 +1,7 @@
 package com.sofia.superHero.features.superHero.data.hero.di
 
+import com.sofia.superHero.app.data.local.AppDatabase
+import com.sofia.superHero.features.superHero.data.hero.local.room.HeroDao
 import com.sofia.superHero.features.superHero.data.hero.remote.HeroApiService
 import dagger.Module
 import dagger.Provides
@@ -15,4 +17,7 @@ class HeroProvides {
     fun provideHeroApiService(retrofit: Retrofit): HeroApiService = retrofit.create(
         HeroApiService::class.java
     )
+
+    @Provides
+    fun provideHeroDao(appDatabase: AppDatabase): HeroDao = appDatabase.heroDao()
 }
