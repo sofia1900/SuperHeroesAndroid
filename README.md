@@ -12,6 +12,5 @@ To do this, I have used the model view - model view (MVVM) architecture pattern,
 several design patterns, a CustomView to show errors and at all times a clean architecture and good practices.
 
 Regarding the storage of information, there are two types: local and remote, and the philosophy followed is the following: if
-found locally, returned from local and, if not, collected from remote, saved locally and returned. For storage
-local, at the moment Shared Preferences is used, later another local data source, Room, will be added and to manage
-The remote data is used Retrofit, which will later be migrated to Firebase.
+found locally, returned from local and, if not, collected from remote, saved locally and returned. Shared Preferences and/or 
+Room are used for local storage and Retrofit is used to manage remote data, which will then be migrated to Firebase.
