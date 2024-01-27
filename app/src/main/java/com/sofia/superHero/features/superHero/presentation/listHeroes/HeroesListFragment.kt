@@ -26,7 +26,7 @@ class HeroesListFragment : Fragment() {
     private val binding get() = _binding!!
     private val heroAdapter = SuperHeroAdapter()
     private val viewModel by viewModels<HeroesListViewModel>()
-    private lateinit var skeleton : Skeleton
+    private lateinit var skeleton: Skeleton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +52,9 @@ class HeroesListFragment : Fragment() {
                     HeroesListFragmentDirections.actionFromFragmentListToFragmentDetail(idHero)
                 )
             }
+            swipeRefresh.setOnRefreshListener {
+                viewModel.refreshList()
+            }
         }
     }
 
@@ -67,7 +70,7 @@ class HeroesListFragment : Fragment() {
                 binding.errorView.hide()
                 skeleton.showSkeleton()
             } else {
-                skeleton.showOriginal()
+                hideLoading()
                 if (it.error != null) {
                     showError(it.error)
                 } else {
@@ -79,6 +82,11 @@ class HeroesListFragment : Fragment() {
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, observer)
+    }
+
+    private fun hideLoading() {
+        skeleton.showOriginal()
+        binding.swipeRefresh.isRefreshing = false
     }
 
     private fun showError(error: ErrorUiModel) {

@@ -22,6 +22,14 @@ class HeroesListViewModel @Inject constructor(private val getSuperHeroesUseCase:
 
     fun loadListSuperHeroes() {
         _uiState.value = UiState(isLoading = true)
+        executeUseCase()
+    }
+
+    fun refreshList () {
+        executeUseCase()
+    }
+
+    private fun executeUseCase () {
         viewModelScope.launch(Dispatchers.IO) {
             getSuperHeroesUseCase().fold(
                 { responseError(it) },
